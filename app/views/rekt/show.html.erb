@@ -1,6 +1,15 @@
 <h1>Rekt#show</h1>
 <p>
 name = <%= @summoner[@summoner_name]["name"]%><br>
- id = <%= @summoner[@summoner_name]["id"]%><br>
- summonerLevel = <%= @summoner[@summoner_name]["summonerLevel"]%><br></p>
+id = <%= @summoner[@summoner_name]["id"]%><br>
+summoner level = <%= @summoner[@summoner_name]["summonerLevel"]%><br>
+team 1 count = <%= @team_1.count%><br>
+team 2 count = <%= @team_2.count%><br><br>
+  team 1:<br>
+  <%= @team_1[0]["summonerId"]%><br>
+  <%= @team_1[0]["totalGamePlayed"]%><br>
+  <%= @team_1[0]["totalGameWon"]%><br>
+  <%= @team_1[0]["GameWinRate"]%><br>
+  
+</p>
 
