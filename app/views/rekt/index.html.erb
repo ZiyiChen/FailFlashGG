@@ -1,39 +1,25 @@
-<h1>Rekt#index</h1>
-<%= form_tag(:action => 'show') do %>
-<table>
-    <tr>
-      <td><%= label_tag(:name) %></td>
-      <td><%= text_field_tag(:name) %></td>
-    </tr>
-   
-    <tr>
-      <td> </td>
-      <td><%= submit_tag("Search") %></td>
-    </tr>
-  </table>
-
-
-    <div class="container">
-      <div class="jumbotron">
-        <h1>My First Bootstrap Page</h1>
-        <p>Resize this responsive page to see the effect!</p>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <h3>Column 1</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    <div class="big-div-main">
+        <div class="row-fluid">
+            <div class="span12">
+                <h1 class="center-text">Teamfeeder.gg</h1>
+            </div>
         </div>
-        <div class="col-sm-4">
-          <h3>Column 2</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        <div class="row-fluid">
+            <div class="center-text">
+                <p>Type in your summonner name to calculate your chance of winning current game!</p>
+            </div>
         </div>
-        <div class="col-sm-4">
-          <h3>Column 3</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        <div class="row-fluid">
+            <div class="span9 center-div">
+                <input type="text" id="sum-input" class="form-control rounded" placeholder="Type in NA summonner name">
+            </div>
+            <div class="span3 center-div">
+                <button class="btn btn-primary search-custom">Search</button>
+            </div>
         </div>
-      </div>
-    </div> 
-  <% end %>
+        <footer class="footer custom-footer">
+            <div class="container">
+                <p class="text-muted">Made by Kittitat Rodchaidee and Ziyi Chen</p>
+            </div>
+        </footer>
+    </div>
