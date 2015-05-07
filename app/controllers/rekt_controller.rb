@@ -9,7 +9,7 @@ class RektController < ApplicationController
 
   def show
     render :layout => 'calc'
-    
+=begin
     #get the current user's summoner info
     @summoner_name = params[:name]
     result = Net::HTTP.get(URI.parse('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+@summoner_name+'?api_key=fc908f24-2c88-4ed9-80a6-d072ada9ed05'))
@@ -117,6 +117,7 @@ class RektController < ApplicationController
     #   player["GameWinRate"] = player["totalGameWon"].to_f / player["totalGamePlayed"] * 100
     #   player
     # end
-    
+=end
   end
+
 end
