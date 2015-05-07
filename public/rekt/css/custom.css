@@ -1,0 +1,55 @@
+html, body {
+    background-image: url('../lolbackground.jpg') !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    /* !!! */
+    width: 100% !important;
+    height: 100%  !important;
+}
+
+body {
+	margin: 0 !important;
+	display: table;
+}
+
+.center-text {
+    text-align: center;
+    color: white;
+    margin-top: 0px !important;
+}
+
+.rounded {
+    -moz-border-radius: 5px !important;
+    -webkit-border-radius: 5px !important;
+    border-radius: 5px !important;
+}
+
+#sum-input {
+    width: 90% !important;
+    margin: 0 auto !important;
+    text-align: left !important;
+}
+
+.center-div {
+    text-align: center !important;
+    margin-left: 0 !important;
+}
+
+.search-custom {
+    width: 90% !important;
+    margin: 0 auto !important;
+}
+
+.custom-footer {
+    height: 3em !important;
+    opacity: 0.6 !important;
+    background-color: black !important;
+
+}
+
+.big-div-main {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}

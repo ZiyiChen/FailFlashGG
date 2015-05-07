@@ -1,0 +1,170 @@
+body {
+    background-color: #f2f2f2 !important;
+}
+
+.w-l-div {
+	background-color: #6ed56e;
+	height: 100%;
+	min-height: 100%;
+	width: 30px;
+}
+
+.test {
+	background-color: #6ed56e !important;
+	max-width: 1px !important;
+	width: 1px !important;
+}
+
+#header-div {
+    background-image: url('pantheon-bg.jpg') !important;
+    background-size: cover !important;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 20px;
+}
+
+.no-margin-top {
+    margin-top: 0px;
+}
+
+#summoner-name {
+    font-size: 5vw;
+    margin-bottom: 2vw;
+    color: white;
+}
+
+#summoner-rank {
+    font-size: 3vw;
+    color: white;
+    font-style: italic !important;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0px !important;
+}
+
+#win-rate {
+    padding-top: 2px !important;
+    padding-bottom: 10px !important;
+    background-color: #fff;
+    border: 2px solid #e2e2e2;
+}
+
+.team-wr-title {
+    text-align: center;
+    font-family: 'Open Sans';
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.3999996185303px;
+    color: #888888;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.team-title {
+    margin-top: 0px;
+    font-size: 1.3em;
+    margin-bottom: 0px;
+}
+
+.red {
+    color: #d9534f;
+}
+
+.green {
+    color: #5cb85c;
+}
+
+.card-group-one {
+    background-color: black;
+}
+
+.card-higher {
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+}
+
+.card-lower {
+    padding-left: 8em !important;
+    padding-right: 8em !important;
+}
+
+.card {
+    height: 20em;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.all-player {
+    background-color: #fff;
+    margin-top: 10px;
+    padding-bottom: 20px !important;
+}
+
+.all-player-table-title {
+    text-align: center;
+    font-family: 'Open Sans';
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.3999996185303px;
+    color: #888888;
+}
+
+.no-margin-left {
+    margin-left: 0px !important;
+}
+
+.white-out-effect {
+    -webkit-filter: opacity(.2);
+    filter: opacity(.2);
+}
+
+.selected-image {
+    width: 30.66%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    margin-top: 70px;
+
+}
+
+.no-margin-top {
+	margin-top: 0px !important;
+}
+
+.underline {
+	width: 90%;
+	height: 2px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #f2f2f2;
+}
+
+.table-custom {
+	margin-top: 10px;
+}
+
+.summoner-spell {
+	float: left;
+	display: block;
+
+}
+
+.ss-custom {
+	margin-top: 20% !important;
+}
+
+.percentage {
+    position: relative !important;
+    bottom: 4.8vw;
+    left: 0.3vw;
+    font-size: 2.7vw;
+    margin-bottom: 0px !important;
+}

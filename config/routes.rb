@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post 'rekt/index'
 
   get 'rekt/show'
-  
+    get 'rekt/index'
   post 'rekt/show'
   
   # The priority is based upon order of creation: first created -> highest priority.
