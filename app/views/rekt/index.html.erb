@@ -4,6 +4,7 @@
                 <h1 class="center-text">Teamfeeder.gg</h1>
             </div>
         </div>
+        <%= form_tag(:action => 'show') do %>
         <div class="row-fluid">
             <div class="center-text">
                 <p>Type in your summonner name to calculate your chance of winning current game!</p>
@@ -11,12 +12,13 @@
         </div>
         <div class="row-fluid">
             <div class="span9 center-div">
-                <input type="text" id="sum-input" class="form-control rounded" placeholder="Type in NA summonner name">
+                <input type="text" id="sum-input" name="name" class="form-control rounded" placeholder="Type in NA summonner name">
             </div>
             <div class="span3 center-div">
-                <button class="btn btn-primary search-custom">Search</button>
+              <button name="Search" type="submit" class="btn btn-primary search-custom">Search</button>
             </div>
         </div>
+        <% end %>
         <footer class="footer custom-footer">
             <div class="container">
                 <p class="text-muted">Made by Kittitat Rodchaidee and Ziyi Chen</p>
