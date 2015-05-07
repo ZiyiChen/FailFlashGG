@@ -16,7 +16,7 @@ body {
 }
 
 #header-div {
-    background-image: url('../pantheon-bg.jpg') !important;
+    background-image: url('pantheon-bg.jpg') !important;
     background-size: cover !important;
     padding-top: 50px;
     padding-bottom: 50px;

@@ -1,5 +1,5 @@
 html, body {
-    background-image: url('../lolbackground.jpg') !important;
+    background-image: url('lolbackground.jpg') !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
     background-attachment: fixed !important;
