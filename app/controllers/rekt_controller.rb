@@ -13,14 +13,15 @@ class RektController < ApplicationController
   def get_current_game_by_summoner_id (id)
     result = Net::HTTP.get(URI.parse('https://na.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/'+id.to_s+'?api_key=fc908f24-2c88-4ed9-80a6-d072ada9ed05'))
     current_game = JSON.parse result
-    
     #get all players in current game by team
     @team_1 = Array.new
     @team_2 = Array.new 
     $my_team_id = 0
     current_game["participants"].each do |player|
-      temp = {"summonerId" => player["summonerId"], "summonerName" => player["summonerName"], "championId" => player["championId"],"totalGamePlayed" => 0, "totalGameWon" => 0, "GameWinRate" => 0.0, "totalGamePlayedAsChampion" => 0, "totalGameWonAsChampion" => 0, "GameWinRateAsChampion" => 0.0, "LeagueTier" => "PLASTIC", "LeagueDivision" => "O"}
+      temp = {"summonerId" => player["summonerId"], "summonerName" => player["summonerName"], "championId" => player["championId"],"totalGamePlayed" => 1, "totalGameWon" => 0,  "totalGameLost" => 0, "GameWinRate" => 0.0, "totalGamePlayedAsChampion" => 1, "totalGameWonAsChampion" => 0, "totalGameLostAsChampion" => 0, "GameWinRateAsChampion" => 0.0, "LeagueTier" => "PLASTIC", "LeagueDivision" => "O", "chanceOfWinningGame" => 0.0}
       if player["summonerId"] == @summoner[@summoner_name]["id"]
+        logger.debug "HIT"
+        logger.debug "player sum name #{player["summonerName"]}"
         $summoner = temp
         $my_team_id = player["teamId"]
       end
@@ -39,21 +40,23 @@ class RektController < ApplicationController
         if champion["id"] == player["championId"]
           player["totalGamePlayedAsChampion"] += champion["stats"]["totalSessionsPlayed"]
           player["totalGameWonAsChampion"] += champion["stats"]["totalSessionsWon"]
+          player["totalGameLostAsChampion"] += player["totalGamePlayedAsChampion"] - player["totalGameWonAsChampion"]
+          player["GameWinRateAsChampion"] += player["totalGameWonAsChampion"].to_f / player["totalGamePlayedAsChampion"].to_f
         end
       end
       player["GameWinRate"] = player["totalGameWon"].to_f / player["totalGamePlayed"] * 100
       
       #get the summoner league info
-      result = Net::HTTP.get(URI.parse('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+player["summonerId"].to_s+'?api_key=fc908f24-2c88-4ed9-80a6-d072ada9ed05'))
+      result = Net::HTTP.get(URI.parse('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+player["summonerId"].to_s+'/entry?api_key=fc908f24-2c88-4ed9-80a6-d072ada9ed05'))
       league = JSON.parse result
-      player["LeagueTier"] = league[player["summonerId"]][0]["tier"]
-      league[player["summonerId"]][0]["entries"].each do |entry|
-        if entry["playerOrTeamId"] == player["summonerId"]
-          player["totalGameWon"] += entry["wins"]
-          player["totalGamePlayed"] += player["totalGameWon"] + entry["losses"]
-          player["LeagueDivision"] = entry["division"]
-        end
-      end
+      logger.debug league[player["summonerId"].to_s].to_s
+      player["LeagueTier"] = league[player["summonerId"].to_s][0]["tier"]
+      player["totalGameWon"] += league[player["summonerId"].to_s][0]["entries"][0]["wins"]
+      player["totalGameLost"] += league[player["summonerId"].to_s][0]["entries"][0]["losses"]
+      player["totalGamePlayed"] += player["totalGameWon"] + league[player["summonerId"].to_s][0]["entries"][0]["losses"]
+      player["GameWinRate"] += player["totalGameWon"].to_f / player["totalGamePlayed"].to_f
+      player["LeagueDivision"] = league[player["summonerId"].to_s][0]["entries"][0]["division"]
+      player["chanceOfWinningGame"] += (player["GameWinRateAsChampion"] + player["GameWinRate"]) / 2.0 * 100
     player
   end
 
@@ -61,10 +64,12 @@ class RektController < ApplicationController
     render :layout => 'calc'
     #get the current user's summoner info
     @summoner_name = params[:name]
+    logger.debug "sum name #{@summoner_name}"
     get_summoner_by_name (@summoner_name)
-    
+    logger.debug "sum info #{@summoner[@summoner_name]["id"]}"
     #get current game info
     get_current_game_by_summoner_id (@summoner[@summoner_name]["id"])
+    logger.debug "sum #{$summoner["summonerName"]}"
     
     #get totalGamePlayed, totalGameWon, GameWinRate, totalGamePlayedAsChampion, totalGameWonAsChampion, GameWinRateAsChampion LeagueTier, and LeagueDivision for opponent team
     if $my_team_id == 100
@@ -72,10 +77,11 @@ class RektController < ApplicationController
     else
       $opponent_team = @team_1
     end
-    $opponent_team.map! do |player|
-      #get the summoner ranked game info for each champion 
-      get_rank_info_by_player(player)
-#     end
+    $summoner = get_rank_info_by_player ($summoner)
+#     $opponent_team.map! do |player|
+#       #get the summoner ranked game info for each champion 
+#       get_rank_info_by_player(player)
+#      end
   end
 
 end

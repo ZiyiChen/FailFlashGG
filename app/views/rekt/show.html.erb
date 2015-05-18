@@ -14,7 +14,7 @@
         </div>
         <div class="span10" id="name-margin">
             <h3 class="no-margin-top" id="summoner-name"><%= $summoner["summonerName"] %></h3>
-            <p id="summoner-rank">Bronze V</p>
+            <p id="summoner-rank"><%= $summoner["LeagueTier"] %> <%= $summoner["LeagueDivision"] %></p>
         </div>
     </div>
     <div id="win-rate">
@@ -78,11 +78,11 @@
                 <img src="losing_box.jpg" class="white-out-effect">
             </div>
             <img src="summonericon.jpg" class="img-responsive selected-image">
-            <h3 class="center-text">Your chance of winning : 0%</h3>
-            <h3 class="center-text">Summonner name : MooJuiz</h3>
-            <h3 class="center-text no-margin-top">Current rank : Bronze V</h3>
-            <h3 class="center-text no-margin-top">Rank W/L : 30/2</h3>
-            <h3 class="center-text no-margin-top">Current Champ W/L : 20/5</h3>
+            <h3 class="center-text">Your chance of winning : <%= $summoner["chanceOfWinningGame"] %>%</h3>
+            <h3 class="center-text">Summonner name : <%= $summoner["summonerName"] %></h3>
+            <h3 class="center-text no-margin-top">Current rank : <%= $summoner["LeagueTier"] %> <%= $summoner["LeagueDivision"] %></h3>
+            <h3 class="center-text no-margin-top">Rank W/L : <%= $summoner["totalGameWon"] %>/<%= $summoner["totalGameLost"] %></h3>
+            <h3 class="center-text no-margin-top">Current Champ W/L : <%= $summoner["totalGameWonAsChampion"] %>/<%= $summoner["totalGameLostAsChampion"] %></h3>
             <div class="underline"></div>
             <div class="table-responsive">
             <table class="table table-striped table-custom">
