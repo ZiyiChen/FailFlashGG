@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   match ':controller/:action/:id', via: [:get, :post]
   
   post 'rekt/index'
-
+  get 'rekt/search'
+  post 'rekt/search'
   get 'rekt/show'
-    get 'rekt/index'
+  get 'rekt/index'
   post 'rekt/show'
   
   # The priority is based upon order of creation: first created -> highest priority.

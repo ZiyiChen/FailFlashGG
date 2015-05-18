@@ -128,11 +128,11 @@ body {
 
 .selected-image {
     width: 30.66%;
-    margin-left: auto;
+    margin-left: 200px;
     margin-right: auto;
     padding-top: 20px;
     margin-top: 70px;
-
+    position: relative !important;
 }
 
 .no-margin-top {
@@ -163,8 +163,8 @@ body {
 
 .percentage {
     position: relative !important;
-    bottom: 4.8vw;
+    bottom: 4.2vw;
     left: 0.3vw;
-    font-size: 2.7vw;
+    font-size: 1.7vw;
     margin-bottom: 0px !important;
 }

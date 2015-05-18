@@ -1,3 +1,4 @@
+include ActionView::Helpers::NumberHelper
 class RektController < ApplicationController
 
   
@@ -41,10 +42,10 @@ class RektController < ApplicationController
           player["totalGamePlayedAsChampion"] += champion["stats"]["totalSessionsPlayed"]
           player["totalGameWonAsChampion"] += champion["stats"]["totalSessionsWon"]
           player["totalGameLostAsChampion"] += player["totalGamePlayedAsChampion"] - player["totalGameWonAsChampion"]
-          player["GameWinRateAsChampion"] += player["totalGameWonAsChampion"].to_f / player["totalGamePlayedAsChampion"].to_f
+          player["GameWinRateAsChampion"] += (player["totalGameWonAsChampion"].to_f / player["totalGamePlayedAsChampion"].to_f).round(2)
         end
       end
-      player["GameWinRate"] = player["totalGameWon"].to_f / player["totalGamePlayed"] * 100
+      player["GameWinRate"] = (player["totalGameWon"].to_f / player["totalGamePlayed"] * 100).round(2)
       
       #get the summoner league info
       result = Net::HTTP.get(URI.parse('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+player["summonerId"].to_s+'/entry?api_key=fc908f24-2c88-4ed9-80a6-d072ada9ed05'))
@@ -56,14 +57,13 @@ class RektController < ApplicationController
       player["totalGamePlayed"] += player["totalGameWon"] + league[player["summonerId"].to_s][0]["entries"][0]["losses"]
       player["GameWinRate"] += player["totalGameWon"].to_f / player["totalGamePlayed"].to_f
       player["LeagueDivision"] = league[player["summonerId"].to_s][0]["entries"][0]["division"]
-      player["chanceOfWinningGame"] += (player["GameWinRateAsChampion"] + player["GameWinRate"]) / 2.0 * 100
+      player["chanceOfWinningGame"] += ((player["GameWinRateAsChampion"] + player["GameWinRate"]) / 2.0 * 100).round(2)
     player
   end
 
-  def show
-    render :layout => 'calc'
+def search
     #get the current user's summoner info
-    @summoner_name = params[:name]
+    @summoner_name = params[:name].gsub(/\s+/, "")
     logger.debug "sum name #{@summoner_name}"
     get_summoner_by_name (@summoner_name)
     logger.debug "sum info #{@summoner[@summoner_name]["id"]}"
@@ -82,6 +82,11 @@ class RektController < ApplicationController
 #       #get the summoner ranked game info for each champion 
 #       get_rank_info_by_player(player)
 #      end
+  redirect_to(:action => 'show')
   end
+
+def show
+  render :layout => 'calc'
+end
 
 end

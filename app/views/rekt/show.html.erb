@@ -51,7 +51,7 @@
             </div>
             <div class="span1">
                 <img src="winning_box.jpg">
-                <p class="percentage">99%</p>
+                <p class="percentage"><%= $summoner["chanceOfWinningGame"] %>%</p>
             </div>
             <div class="span1">
                 <img src="summonericon.jpg" class="white-out-effect">
@@ -77,7 +77,7 @@
             <div class="span1">
                 <img src="losing_box.jpg" class="white-out-effect">
             </div>
-            <img src="summonericon.jpg" class="img-responsive selected-image">
+            <img src="summonericon.jpg" class="selected-image">
             <h3 class="center-text">Your chance of winning : <%= $summoner["chanceOfWinningGame"] %>%</h3>
             <h3 class="center-text">Summonner name : <%= $summoner["summonerName"] %></h3>
             <h3 class="center-text no-margin-top">Current rank : <%= $summoner["LeagueTier"] %> <%= $summoner["LeagueDivision"] %></h3>
@@ -269,23 +269,3 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<!-- below this line is commented -->
-<% if false %> 
-<p>
-name = <%= @summoner[@summoner_name]["name"]%><br>
-id = <%= @summoner[@summoner_name]["id"]%><br>
-summoner level = <%= @summoner[@summoner_name]["summonerLevel"]%><br>
-team 1 count = <%= @team_1.count%><br>
-team 2 count = <%= @team_2.count%><br><br>
-  team 1:<br>
-  <%= @team_1[0]["summonerId"]%><br>
-  <%= @team_1[0]["totalGamePlayed"]%><br>
-  <%= @team_1[0]["totalGameWon"]%><br>
-  <%= @team_1[0]["GameWinRate"]%><br>
-  
-</p>
-
-<% end %>
