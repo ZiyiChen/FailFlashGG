@@ -63,10 +63,10 @@ class RektController < ApplicationController
 
 def search
     #get the current user's summoner info
-    @summoner_name = params[:name].gsub(/\s+/, "")
+    @summoner_name = params[:name].strip.downcase
     logger.debug "sum name #{@summoner_name}"
-    get_summoner_by_name (@summoner_name)
-    logger.debug "sum info #{@summoner[@summoner_name]["id"]}"
+    @summoner = get_summoner_by_name (@summoner_name)
+    logger.debug @summoner.to_s
     #get current game info
     get_current_game_by_summoner_id (@summoner[@summoner_name]["id"])
     logger.debug "sum #{$summoner["summonerName"]}"
