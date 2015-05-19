@@ -66,7 +66,7 @@ def search
     @summoner_name = params[:name].strip.downcase
     puts "sum name #{@summoner_name}"
     @summoner = get_summoner_by_name (@summoner_name)
-    puts @summoner.to_s
+    puts "sum info: "+@summoner.to_s
     #get current game info
     get_current_game_by_summoner_id (@summoner[@summoner_name]["id"])
     puts "sum #{$summoner["summonerName"]}"
