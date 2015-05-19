@@ -21,8 +21,6 @@ class RektController < ApplicationController
     current_game["participants"].each do |player|
       temp = {"summonerId" => player["summonerId"], "summonerName" => player["summonerName"], "championId" => player["championId"],"totalGamePlayed" => 1, "totalGameWon" => 0,  "totalGameLost" => 0, "GameWinRate" => 0.0, "totalGamePlayedAsChampion" => 1, "totalGameWonAsChampion" => 0, "totalGameLostAsChampion" => 0, "GameWinRateAsChampion" => 0.0, "LeagueTier" => "PLASTIC", "LeagueDivision" => "O", "chanceOfWinningGame" => 0.0}
       if player["summonerId"] == @summoner[@summoner_name]["id"]
-        puts "HIT"
-        puts "player sum name #{player["summonerName"]}"
         $summoner = temp
         $my_team_id = player["teamId"]
       end
@@ -50,7 +48,6 @@ class RektController < ApplicationController
       #get the summoner league info
       result = Net::HTTP.get(URI.parse('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+player["summonerId"].to_s+'/entry?api_key=fc908f24-2c88-4ed9-80a6-d072ada9ed05'))
       league = JSON.parse result
-      puts league[player["summonerId"].to_s].to_s
       player["LeagueTier"] = league[player["summonerId"].to_s][0]["tier"]
       player["totalGameWon"] += league[player["summonerId"].to_s][0]["entries"][0]["wins"]
       player["totalGameLost"] += league[player["summonerId"].to_s][0]["entries"][0]["losses"]
@@ -64,12 +61,12 @@ class RektController < ApplicationController
 def search
     #get the current user's summoner info
     @summoner_name = params[:name].strip.downcase
-    puts "sum name #{@summoner_name}"
+    puts "sum name: #{@summoner_name}"
     @summoner = get_summoner_by_name (@summoner_name)
     puts "sum info: "+@summoner.to_s
     #get current game info
     get_current_game_by_summoner_id (@summoner[@summoner_name]["id"])
-    puts "sum #{$summoner["summonerName"]}"
+    puts "sum name from $sum: #{$summoner["summonerName"]}"
     
     #get totalGamePlayed, totalGameWon, GameWinRate, totalGamePlayedAsChampion, totalGameWonAsChampion, GameWinRateAsChampion LeagueTier, and LeagueDivision for opponent team
     if $my_team_id == 100
